@@ -1,0 +1,37 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="180" height="20">
+    <linearGradient id="b" x2="0" y2="100%">
+        <stop offset="0" stop-color="#bbb" stop-opacity=".1" />
+        <stop offset="1" stop-opacity=".1" />
+    </linearGradient>
+    <clipPath id="a">
+        <rect width="170" height="20" rx="3" fill="#fff" />
+    </clipPath>
+    <g clip-path="url(#a)">
+        <path fill="#555" d="M0 0h97v20H0z" />
+        <path fill="#e05d44" d="M97 0h73v20H97z" />
+        <path fill="url(#b)" d="M0 0h170v20H0z" />
+    </g>
+    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
+        <text x="495" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="870">total downloads</text>
+        <text x="495" y="140" transform="scale(.1)" textLength="870">total downloads</text>
+        <text id="dl1" x="1325" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="640">loading...</text>
+        <text id="dl2" x="1325" y="140" transform="scale(.1)" textLength="640">loading...</text>
+    </g>
+    <script type="text/javascript"><![CDATA[
+    var req = new XMLHttpRequest();  
+	req.open('GET', 'https://api.cfwidget.com/wow/addons/carbonite', false);   
+
+	req.onreadystatechange=function() {
+
+	   if (req.readyState==4) {
+		  var dl = JSON.parse(this.responseText);
+		  console.log(dl.downloads.total);
+		  document.getElementById('dl1').textContent = dl.downloads.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		  document.getElementById('dl2').textContent = dl.downloads.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	   }
+	};
+
+	req.send(null);  
+
+  ]]></script>
+</svg>
